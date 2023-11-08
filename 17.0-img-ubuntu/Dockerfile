@@ -27,19 +27,20 @@ RUN apt-get update && \
 	libldap2-dev \
 	libpq-dev \
 	libsasl2-dev \
-	postgresql-client \
-    if [ -z "${TARGETARCH}" ]; then \
-        TARGETARCH="$(dpkg --print-architecture)"; \
-    fi; \
-    WKHTMLTOPDF_ARCH=${TARGETARCH} && \
-    case ${TARGETARCH} in \
-    "amd64") WKHTMLTOPDF_ARCH=amd64 ;; \
-    "arm64") WKHTMLTOPDF_ARCH=amd64 ;; \
-    "ppc64le") WKHTMLTOPDF_ARCH=ppc64el ;; \
-    esac \
-    && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.jammy_${WKHTMLTOPDF_ARCH}.deb \
-    && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
-    && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
+	postgresql-client # \
+# TODO: Fix install wkhtmltopdf 
+#    if [ -z "${TARGETARCH}" ]; then \
+#        TARGETARCH="$(dpkg --print-architecture)"; \
+#    fi; \
+#    WKHTMLTOPDF_ARCH=${TARGETARCH} && \
+#    case ${TARGETARCH} in \
+#    "amd64") WKHTMLTOPDF_ARCH=amd64 ;; \
+#    "arm64") WKHTMLTOPDF_ARCH=amd64 ;; \
+#    "ppc64le") WKHTMLTOPDF_ARCH=ppc64el ;; \
+#    esac \
+#    && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.jammy_${WKHTMLTOPDF_ARCH}.deb \
+#    && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
+#    && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 ENV TZ="UTC"
 
