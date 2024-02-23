@@ -5,6 +5,13 @@ set -e
 if [ -v PASSWORD_FILE ]; then
     PASSWORD="$(< $PASSWORD_FILE)"
 fi
+ODOO_RC="/etc/odoo/odoo.conf"
+
+chown -R odoo /var/lib/odoo
+chown -R odoo /etc/odoo
+chown -R odoo /mnt/extra-addons
+chown -R odoo /mnt/odoo
+chown -R odoo /mnt/enterprise
 
 # set the postgres database host, port, user and password according to the environment
 # and pass them as arguments to the odoo process if not present in the config file
